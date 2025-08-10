@@ -1,3 +1,80 @@
+[data-theme="dark"] .carousel-btn:hover {
+    background: #fda085;
+    color: #232323;
+}
+
+/* Skills carousel styles */
+.skills-carousel-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    margin: 2rem 0;
+}
+
+.skills-carousel {
+    display: flex;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    gap: 1.5rem;
+    padding: 1rem 0;
+    max-width: 90vw;
+}
+
+.skill-card {
+    min-width: 120px;
+    max-width: 140px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+    padding: 1rem 0.5rem;
+    text-align: center;
+    transition: box-shadow 0.3s, border-color 0.3s;
+    border: 2px solid transparent;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-weight: 500;
+    font-size: 1.1rem;
+}
+
+.skill-card:hover {
+    box-shadow: 0 4px 24px rgba(253, 160, 133, 0.18);
+    border: 2px solid #fda085;
+}
+
+.skill-img {
+    width: 48px;
+    height: 48px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-bottom: 0.7rem;
+    border: 2px solid #fda085;
+}
+
+@media (max-width: 600px) {
+    .skills-carousel {
+        max-width: 98vw;
+    }
+    .skill-card {
+        min-width: 32vw;
+        max-width: 40vw;
+    }
+}
+
+/* Dark mode for skills carousel */
+[data-theme="dark"] .skill-card {
+    background: #232323;
+    color: #f1f1f1;
+    border-color: #333;
+}
+[data-theme="dark"] .skill-card:hover {
+    box-shadow: 0 4px 24px rgba(253, 160, 133, 0.13);
+    border: 2px solid #fda085;
+}
+[data-theme="dark"] .skill-img {
+    border-color: #fda085;
+}
 * {
     margin: 0;
     padding: 0;
@@ -12,8 +89,8 @@ body {
 }
 
 header {
-    background: #2c3e50;
-    color: #fff;
+    background: #111;
+    color: #fda085;
     padding: 1rem 0;
 }
 
@@ -26,7 +103,7 @@ nav {
 
 nav h1 {
     font-size: 1.5rem;
-    color: #ecf0f1;
+    color: #fda085;
 }
 
 nav ul {
@@ -39,13 +116,14 @@ nav ul li {
 }
 
 nav ul li a {
-    color: #ecf0f1;
+    color: #fda085;
     text-decoration: none;
     transition: color 0.3s ease;
 }
 
 nav ul li a:hover {
-    color: #3498db;
+    color: #fff;
+    text-shadow: 0 1px 8px #fda08555;
 }
 
 section {
@@ -55,11 +133,41 @@ section {
     margin: 1rem 2rem;
     border-radius: 10px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s, border-color 0.3s;
+}
+
+section:hover {
+    box-shadow: 0 4px 24px rgba(253, 160, 133, 0.25);
+    border: 2px solid #fda085;
+}
+
+[data-theme="dark"] section:hover {
+    box-shadow: 0 4px 24px rgba(253, 160, 133, 0.18);
+    border: 2px solid #fda085;
 }
 
 #home {
-    background: linear-gradient(to right, #6dd5fa, #2980b9);
-    color: white;
+    background: linear-gradient(135deg, #f6d365 0%, #fda085 40%, #a1c4fd 100%);
+    color: #232323;
+    position: relative;
+    overflow: hidden;
+}
+
+#home::before {
+    content: "";
+    position: absolute;
+    top: -40px;
+    left: -40px;
+    width: 120px;
+    height: 120px;
+    background: rgba(255,255,255,0.18);
+    border-radius: 50%;
+    z-index: 0;
+}
+
+#home > * {
+    position: relative;
+    z-index: 1;
 }
 
 footer {
@@ -119,4 +227,158 @@ form button:hover {
 
 .social:hover, .resume:hover {
     border-color: #ecf0f1;
+}
+
+/* Projects carousel styles */
+.projects-carousel-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    margin: 2rem 0;
+}
+
+.projects-carousel {
+    display: flex;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    gap: 1.5rem;
+    padding: 1rem 0;
+    max-width: 90vw;
+}
+
+.project-card {
+    min-width: 260px;
+    max-width: 280px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+    padding: 1.2rem 1rem;
+    text-align: center;
+    transition: box-shadow 0.3s, border-color 0.3s;
+    border: 2px solid transparent;
+}
+
+.project-card:hover {
+        box-shadow: 0 4px 24px rgba(253, 160, 133, 0.18);
+        border: 2px solid #fda085;
+}
+
+.project-img {
+    width: 90px;
+    height: 90px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-bottom: 1rem;
+        border: 3px solid #fda085;
+}
+
+.carousel-btn {
+    background: #2c3e50;
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    width: 38px;
+    height: 38px;
+    font-size: 1.3rem;
+    cursor: pointer;
+    margin: 0 0.5rem;
+    transition: background 0.2s;
+    z-index: 10;
+}
+.carousel-btn:hover {
+    background: #3498db;
+}
+
+@media (max-width: 600px) {
+    .projects-carousel {
+        max-width: 98vw;
+    }
+    .project-card {
+        min-width: 80vw;
+        max-width: 90vw;
+    }
+}
+
+/* Dark mode for carousel */
+[data-theme="dark"] .project-card {
+    background: #232323;
+    color: #f1f1f1;
+    border-color: #333;
+}
+[data-theme="dark"] .project-card:hover {
+        box-shadow: 0 4px 24px rgba(253, 160, 133, 0.13);
+        border: 2px solid #fda085;
+}
+[data-theme="dark"] .project-img {
+        border-color: #fda085;
+}
+[data-theme="dark"] .carousel-btn {
+    background: #444;
+    color: #f1f1f1;
+}
+[data-theme="dark"] .carousel-btn:hover {
+    background: #8ab4f8;
+    color: #232323;
+}
+
+/* Dark mode styles */
+[data-theme="dark"] {
+    background-color: #181818;
+    color: #f1f1f1;
+}
+
+[data-theme="dark"] header,
+[data-theme="dark"] nav,
+[data-theme="dark"] footer {
+    background-color: #222;
+    color: #f1f1f1;
+}
+
+[data-theme="dark"] a {
+    color: #fda085;
+}
+
+[data-theme="dark"] section {
+    background-color: #232323;
+    color: #f1f1f1;
+    border-color: #333;
+}
+
+[data-theme="dark"] .profile-pic {
+    border-color: #333;
+}
+
+[data-theme="dark"] .social, [data-theme="dark"] .resume {
+    background: #232323;
+    color: #f1f1f1;
+    border-color: #333;
+}
+
+[data-theme="dark"] form input,
+[data-theme="dark"] form textarea {
+    background: #181818;
+    color: #f1f1f1;
+    border-color: #333;
+}
+
+[data-theme="dark"] form button {
+    background: #444;
+    color: #f1f1f1;
+}
+
+.loader {
+    display: none; /* hidden by default */
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #3498db;
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    animation: spin 1s linear infinite;
+    margin: 10px auto;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }

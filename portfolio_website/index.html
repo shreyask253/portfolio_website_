@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
+    <button id="darkModeToggle" style="position:fixed;top:2.2rem;right:2.2rem;z-index:2000;padding:0.7rem 1.3rem;border-radius:8px;border:none;background:#2c3e50;color:#fff;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,0.15);">🌙 Dark Mode</button>
     <header>
         <nav>
             <h1>My Portfolio</h1>
@@ -39,36 +40,167 @@
     </section>
 
     <section id="skills">
-        <h2>Skills</h2>
-        <ul>
-            <li>HTML</li>
-            <li>CSS</li>
-            <li>JavaScript</li>
-            <li>React</li>
-        </ul>
+                <h2>Skills</h2>
+                <div class="skills-carousel-wrapper">
+                    <button class="carousel-btn left skill-left" aria-label="Scroll left">&#8592;</button>
+                    <div class="skills-carousel">
+                        <div class="skill-card">
+                            <img src="images/profile.jpg" alt="HTML" class="skill-img">
+                            <span>HTML</span>
+                        </div>
+                        <div class="skill-card">
+                            <img src="images/profile.jpg" alt="CSS" class="skill-img">
+                            <span>CSS</span>
+                        </div>
+                        <div class="skill-card">
+                            <img src="images/profile.jpg" alt="JavaScript" class="skill-img">
+                            <span>JavaScript</span>
+                        </div>
+                        <div class="skill-card">
+                            <img src="images/profile.jpg" alt="React" class="skill-img">
+                            <span>React</span>
+                        </div>
+                        <!-- Add more skill cards as needed -->
+                    </div>
+                    <button class="carousel-btn right skill-right" aria-label="Scroll right">&#8594;</button>
+                </div>
     </section>
 
     <section id="projects">
-        <h2>Projects</h2>
-        <p>Here are some of my recent works:</p>
-        <ul>
-            <li>Portfolio Website</li>
-            <li>ToDo App</li>
-        </ul>
+                <h2>Projects</h2>
+                <p>Here are some of my recent works:</p>
+                <div class="projects-carousel-wrapper">
+                    <button class="carousel-btn left" aria-label="Scroll left">&#8592;</button>
+                    <div class="projects-carousel">
+                        <div class="project-card">
+                            <img src="images/profile.jpg" alt="Portfolio Website" class="project-img">
+                            <h3>Portfolio Website</h3>
+                            <p>Personal portfolio site with dark mode and responsive design.</p>
+                        </div>
+                        <div class="project-card">
+                            <img src="images/profile.jpg" alt="ToDo App" class="project-img">
+                            <h3>ToDo App</h3>
+                            <p>Task management app with CRUD features and local storage.</p>
+                        </div>
+                        <div class="project-card">
+                            <img src="images/profile.jpg" alt="Blog Platform" class="project-img">
+                            <h3>Blog Platform</h3>
+                            <p>Simple blog platform built with React and Node.js.</p>
+                        </div>
+                        <!-- Add more project cards as needed -->
+                    </div>
+                    <button class="carousel-btn right" aria-label="Scroll right">&#8594;</button>
+                </div>
     </section>
 
     <section id="contact">
         <h2>Contact Me</h2>
-        <form>
-            <input type="text" placeholder="Your Name" required><br>
-            <input type="email" placeholder="Your Email" required><br>
-            <textarea placeholder="Your Message" required></textarea><br>
-            <button type="submit">Send</button>
-        </form>
+        <form action="https://formspree.io/f/xzzvyjge" method="POST">
+    <input type="text" name="name" placeholder="Your Name" required><br>
+    <input type="email" name="email" placeholder="Your Email" required><br>
+    <textarea name="message" placeholder="Your Message" required></textarea><br>
+    <button type="submit">Send</button>
+</form>
     </section>
 
     <footer>
         <p>&copy; 2025 Jane Doe. All rights reserved.</p>
-    </footer>
-</body>
-</html>
+        <footer>
+                <p>&copy; 2025 Jane Doe. All rights reserved.</p>
+        </footer>
+        <script>
+            // Dark mode toggle logic
+            const toggleBtn = document.getElementById('darkModeToggle');
+            const body = document.body;
+            // Load preference
+            if (localStorage.getItem('theme') === 'dark') {
+                body.setAttribute('data-theme', 'dark');
+                toggleBtn.textContent = '☀️ Light Mode';
+            }
+            toggleBtn.addEventListener('click', () => {
+                if (body.getAttribute('data-theme') === 'dark') {
+                    body.removeAttribute('data-theme');
+                    localStorage.setItem('theme', 'light');
+                    toggleBtn.textContent = '🌙 Dark Mode';
+                } else {
+                    body.setAttribute('data-theme', 'dark');
+                    localStorage.setItem('theme', 'dark');
+                    toggleBtn.textContent = '☀️ Light Mode';
+                }
+            });
+                    // Projects carousel scroll logic
+                    const carousel = document.querySelector('.projects-carousel');
+                    const btnLeft = document.querySelector('.carousel-btn.left');
+                    const btnRight = document.querySelector('.carousel-btn.right');
+                    if (carousel && btnLeft && btnRight) {
+                        btnLeft.addEventListener('click', () => {
+                            carousel.scrollBy({ left: -300, behavior: 'smooth' });
+                        });
+                        btnRight.addEventListener('click', () => {
+                            carousel.scrollBy({ left: 300, behavior: 'smooth' });
+                        });
+                                // Mouse drag-to-scroll
+                                let isDown = false;
+                                let startX;
+                                let scrollLeft;
+                                carousel.addEventListener('mousedown', (e) => {
+                                    isDown = true;
+                                    carousel.classList.add('dragging');
+                                    startX = e.pageX - carousel.offsetLeft;
+                                    scrollLeft = carousel.scrollLeft;
+                                });
+                                carousel.addEventListener('mouseleave', () => {
+                                    isDown = false;
+                                    carousel.classList.remove('dragging');
+                                });
+                                carousel.addEventListener('mouseup', () => {
+                                    isDown = false;
+                                    carousel.classList.remove('dragging');
+                                });
+                                carousel.addEventListener('mousemove', (e) => {
+                                    if (!isDown) return;
+                                    e.preventDefault();
+                                    const x = e.pageX - carousel.offsetLeft;
+                                    const walk = (x - startX) * 1.5; // scroll-fast
+                                    carousel.scrollLeft = scrollLeft - walk;
+                                });
+                    }
+
+                            // Skills carousel scroll logic
+                            const skillsCarousel = document.querySelector('.skills-carousel');
+                            const skillBtnLeft = document.querySelector('.carousel-btn.left.skill-left');
+                            const skillBtnRight = document.querySelector('.carousel-btn.right.skill-right');
+                            if (skillsCarousel && skillBtnLeft && skillBtnRight) {
+                                skillBtnLeft.addEventListener('click', () => {
+                                    skillsCarousel.scrollBy({ left: -180, behavior: 'smooth' });
+                                });
+                                skillBtnRight.addEventListener('click', () => {
+                                    skillsCarousel.scrollBy({ left: 180, behavior: 'smooth' });
+                                });
+                                // Mouse drag-to-scroll
+                                let isDown = false;
+                                let startX;
+                                let scrollLeft;
+                                skillsCarousel.addEventListener('mousedown', (e) => {
+                                    isDown = true;
+                                    skillsCarousel.classList.add('dragging');
+                                    startX = e.pageX - skillsCarousel.offsetLeft;
+                                    scrollLeft = skillsCarousel.scrollLeft;
+                                });
+                                skillsCarousel.addEventListener('mouseleave', () => {
+                                    isDown = false;
+                                    skillsCarousel.classList.remove('dragging');
+                                });
+                                skillsCarousel.addEventListener('mouseup', () => {
+                                    isDown = false;
+                                    skillsCarousel.classList.remove('dragging');
+                                });
+                                skillsCarousel.addEventListener('mousemove', (e) => {
+                                    if (!isDown) return;
+                                    e.preventDefault();
+                                    const x = e.pageX - skillsCarousel.offsetLeft;
+                                    const walk = (x - startX) * 1.5;
+                                    skillsCarousel.scrollLeft = scrollLeft - walk;
+                                });
+                            }
+        </script>
